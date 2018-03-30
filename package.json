@@ -1,0 +1,24 @@
+{
+  "name": "datetime",
+  "version": "1.0.0",
+  "description": "standard datetime",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jxh150535011/datetime.git"
+  },
+  "keywords": [
+    "datetime",
+    "nodejs",
+    "javascript"
+  ],
+  "author": "jxh150535011",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jxh150535011/datetime/issues"
+  },
+  "homepage": "https://github.com/jxh150535011/datetime#readme"
+}
