@@ -12,6 +12,7 @@ const main = {
                 'M+':date.getMonth()+1,
                 'd+':date.getDate(),
                 'h+':date.getHours(),
+                'H+':date.getHours(),
                 'm+':date.getMinutes(),
                 's+':date.getSeconds(),
                 'q+':Math.floor((date.getMonth()+3)/3),
@@ -43,6 +44,7 @@ const main = {
         'M+':'(1[012]|0?[1-9])',
         'd+':'(3[01]|[12]\\d|0?[1-9])',
         'h+':'([01]?[0-9]|[2][0-3])',
+        'H+':'([01]?[0-9]|[2][0-3])',
         'm+':'([0-5]?[0-9])',
         's+':'([0-5]?[0-9])',
         'q+':'(\\d)',
@@ -68,7 +70,7 @@ const main = {
         let cache=this.cache[rexFormat];
         if(!cache){
             let rexs=[];//{key,match,format,index} {y+ yyyy (\\d{4}) 0 }
-            let keys=['d+','y+','M+','h+','m+','s+'];//d 先进行匹配
+            let keys=['d+','y+','M+','h+','H+','m+','s+'];//d 先进行匹配
             for (let i = 0,len=keys.length; i < len; i++) {
                 let key=keys[i],value=this.regExpMap[key],match=new RegExp(key).exec(rexFormat);
                 if(match){
@@ -197,5 +199,4 @@ const main = {
 
     }
 */
-
-export default main;
+module.exports = main;

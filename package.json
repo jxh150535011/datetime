@@ -1,5 +1,5 @@
 {
-  "name": "datetime",
+  "name": "datetime-standard",
   "version": "1.0.0",
   "description": "standard datetime",
   "main": "index.js",
