@@ -138,15 +138,26 @@ const main = {
         //year, month, day, hours, minutes, seconds, milliseconds
         return null;
     },
-    parse(date, format, zone) {
+    /*
+    设置了zone之后，将date 转换为当前时区所对应zone时区的(时间[stamp=false]或时刻[stamp=true])
+    例如 zone(8) ，将date(981014400000 东8区时间 '2001-01-01 8:0:0') 以zone时区 转换为当前时区时间('2001-01-01 8:0:0'),它们为同一个时间 却为不同的时刻
+    new Date(y,m,d) new Date(long) 之间的不同在于 long 指代某一个时刻
+    例如
+        date('2001-01-01 8:0:0') zone=8 stamp=true 会返回目标时区对应的时刻('2001-01-01 0:0:0' GMT+0000) 否则没有意义 
+        date(981014400000) zone=8 stamp=false 会返回目标时区对应的时间('2001-01-01 8:0:0' GMT+0000) 否则没有意义
+    */
+    parse(date, format, zone , stamp) {//stamp 默认为false ,以date是以zone时区所在的(时间[false]|时刻[true])，转换为当前时区
         if (typeof format == 'number') {
+            stamp = zone;
             zone = format;
             format = '';
         }
         date = this.parseToDate(date, format);
         if (zone != null && date) {
             //减去- zone*60  根据当前时间 计算出当前是否为夏时令
-            date = new Date(date.getTime() + (date.getTimezoneOffset() + zone * 60) * 60 * 1000);//当前时区  跟 北京时间 的偏移值 对于时间戳的数据 根据不同时区 生成北京时间对应的当地时间 这样getTime的数值一定要注意正确性
+            //date.getTimezoneOffset() 格林时区-当前的时区
+            var offset = (date.getTimezoneOffset() + zone * 60) * 60 * 1000;
+            date = new Date(date.getTime() + (stamp&&(-offset)||offset));//当前时区  跟 北京时间 的偏移值 对于时间戳的数据 根据不同时区 生成北京时间对应的当地时间 这样getTime的数值一定要注意正确性
         }
         return date;
     },
