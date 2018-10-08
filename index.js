@@ -152,6 +152,12 @@ const main = {
             zone = format;
             format = '';
         }
+	//以时间为准的解析格式下 如果zone为null 并且date 为string 会默认进行gtm格式解析 并给 zone 进行赋值
+	//预留代码
+	//if(!stamp && zone = null && typeof date == 'string'){
+	//	zone = /^\/Date\([-]?\d+([+-]\d+)\)\/$/.exec(date);
+	//	zone = zone && zone[1] && Math.round(parseInt(zone[1])/100);
+	//}
         date = this.parseToDate(date, format);
         if (zone != null && date) {
             //减去- zone*60  根据当前时间 计算出当前是否为夏时令
